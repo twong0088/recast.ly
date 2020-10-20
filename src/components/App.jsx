@@ -7,13 +7,18 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      //videoList: exampleVideoData,
       currentVideo: exampleVideoData[0]
     };
+    this.onTitleClick = this.onTitleClick.bind(this);
+
   }
 
-  onTitleClick() {
+  onTitleClick(event) {
+    console.log(event.target.id);
     this.setState({
-      currentVideo: exampleVideoData[1]
+
+      currentVideo: exampleVideoData[event.target.id]
     });
     console.log('button clicked');
   }
@@ -35,7 +40,7 @@ class App extends React.Component {
             <div><h5><em>videoPlayer</em><VideoPlayer video = {this.state.currentVideo} /></h5></div>
           </div>
           <div className="col-md-5">
-            <div><h5><em>videoList</em><VideoList onClick={this.onTitleClick.bind(this)} videos = {exampleVideoData}/></h5></div>
+            <div><h5><em>videoList</em><VideoList click={this.onTitleClick} videos = {exampleVideoData}/></h5></div>
           </div>
         </div>
       </div>
