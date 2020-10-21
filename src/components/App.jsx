@@ -1,7 +1,7 @@
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import exampleVideoData from '../data/exampleVideoData.js';
-//import YOUTUBE_API_KEY from '../config.youtube.js';
+import YOUTUBE_API_KEY from '../config/youtube.js';
 import searchYouTube from '../lib/searchYouTube.js';
 
 class App extends React.Component {
@@ -11,14 +11,16 @@ class App extends React.Component {
     this.state = {
       currentVideo: exampleVideoData[0],
       youTubeVideos: exampleVideoData
-      /*youTubeVideos: searchYouTube({
-        key: YOUTUBE_API_KEY,
-        query: 'cats',
-        max: 5
-      })*/
     };
     this.onTitleClick = this.onTitleClick.bind(this);
+  }
 
+  componentDidMount() {
+    searchYouTube({
+      key: YOUTUBE_API_KEY,
+      query: 'cats',
+      max: 5
+    }, (data) => this.setState({youTubeVideos: data}));
   }
 
   onTitleClick(event) {
